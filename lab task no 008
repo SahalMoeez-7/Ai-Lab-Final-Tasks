@@ -1,0 +1,17 @@
+import math
+
+def mm(depth, index, isMax, scores, maxDepth):
+    if depth == maxDepth:
+        return scores [index]
+
+    if isMax:
+        return max(mm(depth+1, index*2, False, scores, maxDepth),
+                   mm(depth+1, index*2+1, False, scores, maxDepth))
+    else:
+        return min(mm(depth+1, index*2, True, scores, maxDepth),
+                   mm(depth+1, index*2+1, True, scores, maxDepth))
+
+scores = [3, 5, 2, 9, 3, 5, 2, 9]
+maxDepth = int(math.log(len(scores), 2))
+
+print(mm(0, 0, True, scores, maxDepth))
